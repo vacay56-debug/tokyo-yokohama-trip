@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 東京・橫濱 緊急醫療救護研習之旅</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: jf-openhuninn (粉圓字型) & Zen Maru Gothic (圓體備援) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for cute icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* 繪本風字型與全域風格設定 */
+        :root {
+            --washi-bg: #FFFCF6;
+            --ink-border: #3E3A39;
+            --coral-pink: #F2A497;
+            --yamabuki-yellow: #F6D27A;
+            --mizuiro-blue: #A8D3E6;
+            --wakatake-green: #B9DAA5;
+        }
+
+        body {
+            font-family: 'jf-openhuninn', 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Quicksand', sans-serif;
+            background-color: var(--washi-bg);
+            color: var(--ink-border);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 3px 墨灰粗線框核心系統 */
+        .ink-box {
+            border: 3px solid var(--ink-border);
+            border-radius: 24px;
+            box-shadow: 4px 4px 0 var(--ink-border);
+            background-color: #FFFFFF;
+        }
+
+        .ink-box-sm {
+            border: 3px solid var(--ink-border);
+            border-radius: 16px;
+            box-shadow: 3px 3px 0 var(--ink-border);
+        }
+
+        .ink-btn {
+            border: 3px solid var(--ink-border);
+            border-radius: 9999px;
+            box-shadow: 3px 3px 0 var(--ink-border);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .ink-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 var(--ink-border);
+        }
+
+        /* 標籤小藥丸樣式 */
+        .tag-pill {
+            border: 2px solid var(--ink-border);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* 繪本動態：輕飄搖晃效果 */
+        @keyframes gentleSway {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(1.2deg); }
+        }
+
+        @keyframes cloudFloat {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(12px); }
+        }
+
+        @keyframes bouncePop {
+            0% { transform: scale(0.94); opacity: 0; }
+            70% { transform: scale(1.02); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-sway {
+            animation: gentleSway 4s ease-in-out infinite;
+        }
+
+        .animate-cloud {
+            animation: cloudFloat 6s ease-in-out infinite;
+        }
+
+        .animate-cloud-slow {
+            animation: cloudFloat 9s ease-in-out infinite reverse;
+        }
+
+        .timeline-bounce {
+            animation: bouncePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* 支援無障礙：減少動態效果 (prefers-reduced-motion) */
+        @media (prefers-reduced-motion: reduce) {
+            *, .animate-sway, .animate-cloud, .animate-cloud-slow, .timeline-bounce {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* 日期切換按鈕選中樣式 */
+        .day-tab.active {
+            background-color: var(--yamabuki-yellow);
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0 var(--ink-border);
+        }
+
+        /* 待辦事項刪除線 */
+        .todo-done {
+            text-decoration: line-through;
+            opacity: 0.55;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20 selection:bg-[#F6D27A] selection:text-[#3E3A39]">
+
+    <!-- 頂端固定懸浮導航選單 -->
+    <header class="sticky top-2 z-50 px-3 max-w-4xl mx-auto">
+        <nav class="ink-box bg-[#FFFCF6] px-3 py-2 flex items-center justify-between shadow-md">
+            <a href="#hero" class="flex items-center gap-2 group">
+                <span class="w-9 h-9 rounded-full bg-[#F2A497] border-2 border-[#3E3A39] flex items-center justify-center text-white text-base">
+                    🚑
+                </span>
+                <span class="font-bold text-sm md:text-base text-[#3E3A39] tracking-wide">
+                    2026救護研習
+                </span>
+            </a>
+            
+            <div class="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm font-bold">
+                <a href="#flights" class="px-2.5 py-1.5 rounded-full hover:bg-[#A8D3E6] border border-transparent hover:border-[#3E3A39] transition">航班</a>
+                <a href="#itinerary" class="px-2.5 py-1.5 rounded-full hover:bg-[#F6D27A] border border-transparent hover:border-[#3E3A39] transition">行程</a>
+                <a href="#hotels" class="px-2.5 py-1.5 rounded-full hover:bg-[#B9DAA5] border border-transparent hover:border-[#3E3A39] transition">住宿</a>
+                <a href="#checklist" class="px-2.5 py-1.5 rounded-full hover:bg-[#F2A497] border border-transparent hover:border-[#3E3A39] transition">待辦</a>
+                <a href="#delegation" class="px-2.5 py-1.5 rounded-full hover:bg-[#A8D3E6] border border-transparent hover:border-[#3E3A39] transition">團員</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主內容區塊 -->
+    <main class="max-w-4xl mx-auto px-4 mt-6 space-y-12">
+
+        <!-- HERO 首頁插圖＋標題＋出發倒數 -->
+        <section id="hero" class="ink-box p-6 md:p-8 bg-white relative overflow-hidden text-center">
+            <!-- 裝飾背景小太陽 -->
+            <div class="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-[#F6D27A] opacity-30 border-4 border-[#3E3A39]"></div>
+            
+            <!-- 組織小徽章 -->
+            <div class="inline-flex items-center gap-2 bg-[#A8D3E6] px-4 py-1.5 rounded-full border-2 border-[#3E3A39] text-xs md:text-sm font-bold shadow-sm mb-3">
+                <span>🇯🇵 臺灣・日本 救急業務國際交流</span>
+            </div>
+
+            <!-- 主標題 -->
+            <h1 class="text-2xl md:text-4xl font-extrabold text-[#3E3A39] leading-tight tracking-tight mt-1">
+                2026 東京・橫濱<br class="md:hidden"> 緊急醫療救護研習
+            </h1>
+            <p class="text-xs md:text-base text-stone-600 font-medium mt-2">
+                內政部消防署・臺中市政府消防局 聯合研習訪團（10/27 - 10/31）
+            </p>
+
+            <!-- 繪本自繪 SVG：富士山、東京鐵塔、橫濱摩天輪與日本救急車 -->
+            <div class="my-6 max-w-xl mx-auto relative flex justify-center">
+                <svg viewBox="0 0 520 220" class="w-full h-auto max-h-[220px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 漂浮雲朵 -->
+                    <g class="animate-cloud opacity-80">
+                        <path d="M50 45 C45 35, 60 25, 75 30 C85 20, 105 25, 110 35 C120 35, 125 45, 115 52 C100 55, 60 55, 50 45 Z" fill="#FFFFFF" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+                    </g>
+                    <g class="animate-cloud-slow opacity-80">
+                        <path d="M380 35 C375 25, 390 18, 405 22 C415 15, 435 18, 440 28 C450 28, 455 38, 445 44 C430 46, 390 46, 380 35 Z" fill="#FFFFFF" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- 富士山景 (若竹綠+雪冠) -->
+                    <path d="M120 185 L180 80 Q195 55 210 80 L270 185 Z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+                    <path d="M180 80 Q195 55 210 80 L220 100 Q205 108 195 98 Q185 108 170 100 Z" fill="#FFFFFF" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+
+                    <!-- 東京鐵塔 (珊瑚粉) -->
+                    <g transform="translate(60, 40)">
+                        <polygon points="40,20 30,145 50,145" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+                        <line x1="20" y1="145" x2="60" y2="145" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="28" y1="95" x2="52" y2="95" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="40" cy="15" r="4" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+                    </g>
+
+                    <!-- 橫濱摩天輪 (水色線條) -->
+                    <g transform="translate(390, 80)">
+                        <circle cx="45" cy="45" r="40" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+                        <circle cx="45" cy="45" r="8" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+                        <line x1="45" y1="5" x2="45" y2="85" stroke="#A8D3E6" stroke-width="2.5"/>
+                        <line x1="5" y1="45" x2="85" y2="45" stroke="#A8D3E6" stroke-width="2.5"/>
+                        <line x1="17" y1="17" x2="73" y2="73" stroke="#A8D3E6" stroke-width="2.5"/>
+                        <line x1="17" y1="73" x2="73" y2="17" stroke="#A8D3E6" stroke-width="2.5"/>
+                        <polyline points="20,105 45,60 70,105" stroke="#3E3A39" stroke-width="3" fill="none"/>
+                    </g>
+
+                    <!-- 地平線道路 -->
+                    <line x1="20" y1="185" x2="500" y2="185" stroke="#3E3A39" stroke-width="3.5" stroke-linecap="round"/>
+
+                    <!-- 日本救急車 (Ambulance - 可愛晃動) -->
+                    <g class="animate-sway" transform="translate(200, 120)">
+                        <!-- 車身本體 -->
+                        <rect x="15" y="15" width="125" height="50" rx="10" fill="#FFFFFF" stroke="#3E3A39" stroke-width="3"/>
+                        <!-- 車頭斜面 -->
+                        <path d="M125 30 L145 42 L145 65 L125 65 Z" fill="#FFFFFF" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+                        <!-- 車頂紅色警示燈 (珊瑚粉) -->
+                        <path d="M60 9 Q75 4 90 9 Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5"/>
+                        <!-- 側面紅色警示條 -->
+                        <rect x="15" y="42" width="125" height="6" fill="#F2A497"/>
+                        <!-- 紅十字標誌 -->
+                        <rect x="42" y="24" width="14" height="4" fill="#F2A497"/>
+                        <rect x="47" y="19" width="4" height="14" fill="#F2A497"/>
+                        <!-- 車窗 (水色) -->
+                        <rect x="25" y="20" width="22" height="14" rx="3" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2"/>
+                        <rect x="68" y="20" width="30" height="14" rx="3" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2"/>
+                        <path d="M110 20 L128 20 L136 34 L110 34 Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2"/>
+                        <!-- 車輪 -->
+                        <circle cx="45" cy="65" r="11" fill="#3E3A39"/>
+                        <circle cx="45" cy="65" r="4" fill="#FFFFFF"/>
+                        <circle cx="120" cy="65" r="11" fill="#3E3A39"/>
+                        <circle cx="120" cy="65" r="4" fill="#FFFFFF"/>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- 即時倒數計時卡片 -->
+            <div class="ink-box-sm bg-[#FFFCF6] p-4 max-w-md mx-auto">
+                <div class="flex items-center justify-center gap-2 text-xs font-bold text-stone-600 mb-2">
+                    <i class="fa-solid fa-hourglass-half text-[#F2A497]"></i>
+                    <span>出發倒數計時（2026/10/27 09:00 松山起飛）</span>
+                </div>
+                <div class="grid grid-cols-4 gap-2 text-center" id="countdown">
+                    <div class="bg-[#F6D27A] p-2 rounded-xl border-2 border-[#3E3A39]">
+                        <div class="text-xl md:text-2xl font-black" id="cd-days">--</div>
+                        <div class="text-[10px] font-bold">天</div>
+                    </div>
+                    <div class="bg-[#A8D3E6] p-2 rounded-xl border-2 border-[#3E3A39]">
+                        <div class="text-xl md:text-2xl font-black" id="cd-hours">--</div>
+                        <div class="text-[10px] font-bold">小時</div>
+                    </div>
+                    <div class="bg-[#B9DAA5] p-2 rounded-xl border-2 border-[#3E3A39]">
+                        <div class="text-xl md:text-2xl font-black" id="cd-minutes">--</div>
+                        <div class="text-[10px] font-bold">分鐘</div>
+                    </div>
+                    <div class="bg-[#F2A497] p-2 rounded-xl border-2 border-[#3E3A39]">
+                        <div class="text-xl md:text-2xl font-black" id="cd-seconds">--</div>
+                        <div class="text-[10px] font-bold">秒</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 航班資訊卡片 (登機證票券風格) -->
+        <section id="flights" class="space-y-4">
+            <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-[#A8D3E6] border-2 border-[#3E3A39] flex items-center justify-center font-bold text-xs">✈️</span>
+                <h2 class="text-xl font-bold text-[#3E3A39]">航班搭乘資訊</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- 去程 CI220 -->
+                <div class="ink-box p-5 bg-white relative">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="tag-pill bg-[#F6D27A]">去程航班・CI220</span>
+                        <span class="text-xs font-bold text-stone-500">中華航空 China Airlines</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between text-center my-3">
+                        <div>
+                            <div class="text-2xl font-black text-[#3E3A39]">TSA</div>
+                            <div class="text-xs font-bold text-stone-600">臺北松山</div>
+                            <div class="text-sm font-black text-[#F2A497] mt-1">09:00</div>
+                        </div>
+                        <div class="flex-1 px-4 flex flex-col items-center">
+                            <span class="text-[11px] font-bold text-stone-500 mb-1">3小時 50分</span>
+                            <div class="w-full flex items-center">
+                                <div class="w-2 h-2 rounded-full bg-[#3E3A39]"></div>
+                                <div class="flex-1 border-t-2 border-dashed border-[#3E3A39]"></div>
+                                <span class="mx-1 text-sm">✈️</span>
+                                <div class="flex-1 border-t-2 border-dashed border-[#3E3A39]"></div>
+                                <div class="w-2 h-2 rounded-full bg-[#3E3A39]"></div>
+                            </div>
+                            <span class="text-[10px] font-bold text-stone-500 mt-1">10/27 (二)</span>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-black text-[#3E3A39]">HND</div>
+                            <div class="text-xs font-bold text-stone-600">東京羽田</div>
+                            <div class="text-sm font-black text-[#A8D3E6] mt-1">12:50</div>
+                        </div>
+                    </div>
+
+                    <div class="border-t-2 border-dashed border-[#3E3A39] pt-3 mt-3 flex justify-between text-xs font-bold text-stone-600">
+                        <span><i class="fa-solid fa-bell text-[#F2A497] mr-1"></i> 集合：07:00 松山第一航廈</span>
+                        <span>抵達日方專車迎接 🚌</span>
+                    </div>
+                </div>
+
+                <!-- 回程 CI221 -->
+                <div class="ink-box p-5 bg-white relative">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="tag-pill bg-[#B9DAA5]">回程航班・CI221</span>
+                        <span class="text-xs font-bold text-stone-500">中華航空 China Airlines</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-center my-3">
+                        <div>
+                            <div class="text-2xl font-black text-[#3E3A39]">HND</div>
+                            <div class="text-xs font-bold text-stone-600">東京羽田</div>
+                            <div class="text-sm font-black text-[#A8D3E6] mt-1">14:15</div>
+                        </div>
+                        <div class="flex-1 px-4 flex flex-col items-center">
+                            <span class="text-[11px] font-bold text-stone-500 mb-1">3小時 00分</span>
+                            <div class="w-full flex items-center">
+                                <div class="w-2 h-2 rounded-full bg-[#3E3A39]"></div>
+                                <div class="flex-1 border-t-2 border-dashed border-[#3E3A39]"></div>
+                                <span class="mx-1 text-sm">✈️</span>
+                                <div class="flex-1 border-t-2 border-dashed border-[#3E3A39]"></div>
+                                <div class="w-2 h-2 rounded-full bg-[#3E3A39]"></div>
+                            </div>
+                            <span class="text-[10px] font-bold text-stone-500 mt-1">10/31 (六)</span>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-black text-[#3E3A39]">TSA</div>
+                            <div class="text-xs font-bold text-stone-600">臺北松山</div>
+                            <div class="text-sm font-black text-[#F2A497] mt-1">17:15</div>
+                        </div>
+                    </div>
+
+                    <div class="border-t-2 border-dashed border-[#3E3A39] pt-3 mt-3 flex justify-between text-xs font-bold text-stone-600">
+                        <span><i class="fa-solid fa-clock text-[#F2A497] mr-1"></i> 飯店 11:00 退房出發</span>
+                        <span>12:15 前抵達羽田機場</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 每日行程：上方日期切換，下方彈跳時間軸 -->
+        <section id="itinerary" class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-full bg-[#F6D27A] border-2 border-[#3E3A39] flex items-center justify-center font-bold text-xs">📅</span>
+                    <h2 class="text-xl font-bold text-[#3E3A39]">每日研習詳細行程</h2>
+                </div>
+                <span class="text-xs font-bold text-stone-500 hidden sm:inline">點擊切換各天行程</span>
+            </div>
+
+            <!-- 日期切換按鈕 (橫向滾動友善) -->
+            <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+                <button onclick="changeDay(1)" id="btn-day-1" class="day-tab active ink-btn bg-white px-4 py-2 text-xs md:text-sm whitespace-nowrap">
+                    D1・10/27 (二)
+                </button>
+                <button onclick="changeDay(2)" id="btn-day-2" class="day-tab ink-btn bg-white px-4 py-2 text-xs md:text-sm whitespace-nowrap">
+                    D2・10/28 (三)
+                </button>
+                <button onclick="changeDay(3)" id="btn-day-3" class="day-tab ink-btn bg-white px-4 py-2 text-xs md:text-sm whitespace-nowrap">
+                    D3・10/29 (四)
+                </button>
+                <button onclick="changeDay(4)" id="btn-day-4" class="day-tab ink-btn bg-white px-4 py-2 text-xs md:text-sm whitespace-nowrap">
+                    D4・10/30 (五)
+                </button>
+                <button onclick="changeDay(5)" id="btn-day-5" class="day-tab ink-btn bg-white px-4 py-2 text-xs md:text-sm whitespace-nowrap">
+                    D5・10/31 (六)
+                </button>
+            </div>
+
+            <!-- 行程時間軸內容容器 -->
+            <div id="timeline-container" class="timeline-bounce space-y-4">
+                <!-- Javascript will inject content here -->
+            </div>
+        </section>
+
+        <!-- 住宿資訊卡片 -->
+        <section id="hotels" class="space-y-4">
+            <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-[#B9DAA5] border-2 border-[#3E3A39] flex items-center justify-center font-bold text-xs">🏨</span>
+                <h2 class="text-xl font-bold text-[#3E3A39]">飯店住宿資訊</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- 飯店 1: 東京九段下 -->
+                <div class="ink-box p-5 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="tag-pill bg-[#A8D3E6]">10/27 ~ 10/29 (連住3晚)</span>
+                            <span class="text-xs font-bold text-stone-500">東京都千代田區</span>
+                        </div>
+                        <h3 class="text-lg font-black text-[#3E3A39]">京王プレッソイン東京九段下</h3>
+                        <p class="text-xs text-stone-500">Keio Presso Inn Tokyo Kudanshita</p>
+                        
+                        <div class="my-3 space-y-1 text-xs text-stone-700 bg-[#FFFCF6] p-3 rounded-xl border-2 border-[#3E3A39]">
+                            <p><strong><i class="fa-solid fa-location-dot text-[#F2A497] mr-1"></i>交通：</strong>地下鐵東西線／半藏門線／都營新宿線「九段下站」5號出口步行約2分鐘。</p>
+                            <p><strong><i class="fa-solid fa-mug-saucer text-[#F6D27A] mr-1"></i>特點：</strong>交通極其便利，直達東京消防廳與新宿廳舍。</p>
+                        </div>
+                    </div>
+                    <a href="https://maps.google.com/?q=Keio+Presso+Inn+Tokyo+Kudanshita" target="_blank" class="ink-btn bg-[#F6D27A] py-2 px-4 text-xs w-full text-center mt-2">
+                        <i class="fa-solid fa-map-location-dot mr-1.5"></i> 開啟 Google Maps 導航
+                    </a>
+                </div>
+
+                <!-- 飯店 2: 橫濱 Citadines -->
+                <div class="ink-box p-5 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="tag-pill bg-[#F2A497]">10/30 (入住1晚)</span>
+                            <span class="text-xs font-bold text-stone-500">橫濱市中區</span>
+                        </div>
+                        <h3 class="text-lg font-black text-[#3E3A39]">シタディーンハーバーフロント横浜</h3>
+                        <p class="text-xs text-stone-500">Citadines Harbour Front Yokohama</p>
+                        
+                        <div class="my-3 space-y-1 text-xs text-stone-700 bg-[#FFFCF6] p-3 rounded-xl border-2 border-[#3E3A39]">
+                            <p><strong><i class="fa-solid fa-location-dot text-[#F2A497] mr-1"></i>交通：</strong>橫濱港濱未來線「日本大通り站」直結共構。</p>
+                            <p><strong><i class="fa-solid fa-ship text-[#A8D3E6] mr-1"></i>特點：</strong>港灣視野極佳，距橫濱市民醫院及晚宴會場車程便捷。</p>
+                        </div>
+                    </div>
+                    <a href="https://maps.google.com/?q=Citadines+Harbour+Front+Yokohama" target="_blank" class="ink-btn bg-[#A8D3E6] py-2 px-4 text-xs w-full text-center mt-2">
+                        <i class="fa-solid fa-map-location-dot mr-1.5"></i> 開啟 Google Maps 導航
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 可打勾待辦清單 (支援 LocalStorage 自動儲存) -->
+        <section id="checklist" class="ink-box p-6 bg-white space-y-4">
+            <div class="flex items-center justify-between border-b-2 border-[#3E3A39] pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-full bg-[#F2A497] border-2 border-[#3E3A39] flex items-center justify-center font-bold text-xs">📝</span>
+                    <h2 class="text-xl font-bold text-[#3E3A39]">出發行李與研習備忘清單</h2>
+                </div>
+                <span class="text-xs font-bold bg-[#FFFCF6] px-2.5 py-1 rounded-full border border-[#3E3A39]" id="todo-count">0 / 0 完成</span>
+            </div>
+
+            <p class="text-xs text-stone-500">勾選後將自動儲存進度於本裝置，亦可自由新增個人待辦事項！</p>
+
+            <!-- 待辦清單容器 -->
+            <div class="space-y-2.5" id="todo-list">
+                <!-- Javascript will render todo items -->
+            </div>
+
+            <!-- 新增項目輸入框 -->
+            <div class="flex gap-2 pt-2">
+                <input type="text" id="new-todo-input" placeholder="新增個人備忘項目..." class="flex-1 ink-box-sm px-4 py-2 text-xs md:text-sm bg-[#FFFCF6] focus:outline-none focus:ring-2 focus:ring-[#F6D27A]">
+                <button onclick="addNewTodo()" class="ink-btn bg-[#F6D27A] px-4 py-2 text-xs md:text-sm font-bold">
+                    <i class="fa-solid fa-plus mr-1"></i> 新增
+                </button>
+            </div>
+        </section>
+
+        <!-- 研習亮點議題 & 訪團組成名單 -->
+        <section id="delegation" class="space-y-6">
+            <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-[#A8D3E6] border-2 border-[#3E3A39] flex items-center justify-center font-bold text-xs">💡</span>
+                <h2 class="text-xl font-bold text-[#3E3A39]">研習核心議題 & 訪團成員</h2>
+            </div>
+
+            <!-- 5 大核心議題卡 -->
+            <div class="ink-box p-5 bg-white">
+                <h3 class="font-black text-[#3E3A39] text-sm md:text-base mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-stethoscope text-[#F2A497]"></i> 五大考察重點議題
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+                    <div class="p-3 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="font-black text-[#3E3A39] block text-sm mb-1">#7119 AI 應用</span>
+                        <p class="text-stone-600">急救電話諮詢判定輔助系統與 AI 自動檢傷分流機制。</p>
+                    </div>
+                    <div class="p-3 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="font-black text-[#3E3A39] block text-sm mb-1">マイナ救急 (健保卡應用)</span>
+                        <p class="text-stone-600">個人編號卡線上讀取患者既往病歷、過敏史與即時處置整合。</p>
+                    </div>
+                    <div class="p-3 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="font-black text-[#3E3A39] block text-sm mb-1">DMAT / YMAT 機制</span>
+                        <p class="text-stone-600">東京/橫濱災害醫療團隊與急救消防車輛同乘聯動實務。</p>
+                    </div>
+                    <div class="p-3 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="font-black text-[#3E3A39] block text-sm mb-1">119 緊急度檢傷分級</span>
+                        <p class="text-stone-600">橫濱市指令中心重度優先判定及救護資源最佳化派遺法規。</p>
+                    </div>
+                    <div class="p-3 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6] sm:col-span-2 md:col-span-1">
+                        <span class="font-black text-[#3E3A39] block text-sm mb-1">救急自治條例實施</span>
+                        <p class="text-stone-600">地方自治條例第7條救急出動原則與醫院急診銜接制度。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15 位訪團名冊 -->
+            <div class="ink-box p-5 bg-white">
+                <h3 class="font-black text-[#3E3A39] text-sm md:text-base mb-3 flex items-center justify-between">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-group text-[#A8D3E6]"></i> 訪團成員組成 (共 15 名)
+                    </span>
+                    <span class="text-xs bg-[#B9DAA5] px-2.5 py-0.5 rounded-full border border-[#3E3A39] font-bold">含隨團日語翻譯</span>
+                </h3>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-xs">
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">內政部消防署</span>
+                        <span class="font-bold text-[#3E3A39]">李明憲 組長</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">內政部消防署</span>
+                        <span class="font-bold text-[#3E3A39]">莊念恩 科長</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">內政部消防署</span>
+                        <span class="font-bold text-[#3E3A39]">李文靖 專員</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">衛生福利部</span>
+                        <span class="font-bold text-[#3E3A39]">卓琍萍 簡任技正</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市消防局</span>
+                        <span class="font-bold text-[#3E3A39]">孫福佑 局長</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市消防局</span>
+                        <span class="font-bold text-[#3E3A39]">蔡石芳 科長</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市消防局</span>
+                        <span class="font-bold text-[#3E3A39]">顏志軒 科員</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市消防局</span>
+                        <span class="font-bold text-[#3E3A39]">黃國彰 高級救護員</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市消防局</span>
+                        <span class="font-bold text-[#3E3A39]">葉文閔 高級救護員</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市衛生局</span>
+                        <span class="font-bold text-[#3E3A39]">吳雅玲 科長</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市醫療指導醫師</span>
+                        <span class="font-bold text-[#3E3A39]">陳維恭 主任</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市醫療指導醫師</span>
+                        <span class="font-bold text-[#3E3A39]">鍾侑庭 主任</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市醫療指導醫師</span>
+                        <span class="font-bold text-[#3E3A39]">高正國 醫師</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">臺中市醫療指導醫師</span>
+                        <span class="font-bold text-[#3E3A39]">林金翰 醫師</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6]">
+                        <span class="text-[10px] text-stone-500 font-bold block">隨團翻譯</span>
+                        <span class="font-bold text-[#3E3A39]">賴淑琦 小姐</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="mt-16 text-center text-xs text-stone-500 py-6 border-t-2 border-[#3E3A39] bg-[#FFFCF6]">
+        <p class="font-bold">2026 東京・橫濱 緊急醫療救護研習團隊 專用手冊</p>
+        <p class="text-[11px] mt-1 text-stone-400">祝全體同仁研習收穫豐碩・旅程平安圓滿 🌸</p>
+    </footer>
+
+    <!-- 行程資料與互動邏輯 -->
+    <script>
+        // 行程資料集 (包含時間、內容、交通標籤、必去註記、Google Maps 連結)
+        const itineraryData = {
+            1: {
+                date: "2026年10月27日 (星期二)",
+                title: "啟程飛往東京・安頓與準備",
+                stay: "京王プレッソイン東京九段下",
+                items: [
+                    {
+                        time: "07:00",
+                        title: "松山機場集合",
+                        desc: "第一航廈中華航空櫃台集合，領隊確認人員、證件、研習禮品與託運行李。",
+                        transport: "集合準備",
+                        transportColor: "#FFFCF6",
+                        isMust: false,
+                        locationName: "臺北松山機場",
+                        mapQuery: "臺北松山機場"
+                    },
+                    {
+                        time: "09:00 - 12:50",
+                        title: "搭乘中華航空 CI220 航班",
+                        desc: "飛往東京羽田機場 (HND)，機上享用餐點，預計 12:50 降落。",
+                        transport: "華航客機",
+                        transportColor: "#A8D3E6",
+                        isMust: false,
+                        locationName: "東京羽田國際機場",
+                        mapQuery: "Tokyo Haneda Airport"
+                    },
+                    {
+                        time: "13:30 - 14:00",
+                        title: "羽田機場 日方迎賓接駁",
+                        desc: "通關後日方代表迎接，安排署部包車前往東京市區飯店。",
+                        transport: "專車包車 🚌",
+                        transportColor: "#F6D27A",
+                        isMust: false,
+                        locationName: "羽田機場接機大廳",
+                        mapQuery: "Haneda Airport International Terminal"
+                    },
+                    {
+                        time: "14:30 後",
+                        title: "飯店 Check-in & 研習資料整頓",
+                        desc: "入住「京王プレッソイン東京九段下」，團員整理會議資料與翌日演講簡報，晚間自由調整作息。",
+                        transport: "步行入館 🚶",
+                        transportColor: "#B9DAA5",
+                        isMust: false,
+                        locationName: "京王プレッソイン東京九段下",
+                        mapQuery: "Keio Presso Inn Tokyo Kudanshita"
+                    }
+                ]
+            },
+            2: {
+                date: "2026年10月28日 (星期三)",
+                title: "東京消防廳拜會・DMAT・AI救急研討",
+                stay: "京王プレッソイン東京九段下",
+                items: [
+                    {
+                        time: "08:45 - 09:30",
+                        title: "飯店大廳集合出發",
+                        desc: "全體團員著正式公務服裝集合，搭乘地下鐵前往東京消防廳大手町廳舍。",
+                        transport: "大眾運輸 🚇",
+                        transportColor: "#A8D3E6",
+                        isMust: false,
+                        locationName: "九段下站 往 大手町站",
+                        mapQuery: "Tokyo Fire Department"
+                    },
+                    {
+                        time: "09:30 - 10:00",
+                        title: "東京消防廳 表敬拜會",
+                        desc: "拜會東京消防廳首長與高層，致贈紀念禮品與交流互訪合影。",
+                        transport: "公務拜會",
+                        transportColor: "#FFFCF6",
+                        isMust: true,
+                        locationName: "東消應接室 (大手町廳舍)",
+                        mapQuery: "Tokyo Fire Department, Chiyoda City, Tokyo"
+                    },
+                    {
+                        time: "10:15 - 11:45",
+                        title: "鍾侑庭主任專題演講",
+                        desc: "臺中市醫療指導醫師鍾侑庭主任演講，臺日急救醫療實務深度研討。",
+                        transport: "學術演講",
+                        transportColor: "#FFFCF6",
+                        isMust: true,
+                        locationName: "東消 8 樓特別會議室",
+                        mapQuery: "Tokyo Fire Department, Chiyoda City, Tokyo"
+                    },
+                    {
+                        time: "12:20 - 13:20",
+                        title: "移動至新宿午餐",
+                        desc: "搭乘大眾運輸前往新宿 NS 大樓享用午餐，隨後散步前往東京都廳舍。",
+                        transport: "大眾運輸 🚇",
+                        transportColor: "#A8D3E6",
+                        isMust: false,
+                        locationName: "新宿 NS 大樓",
+                        mapQuery: "Shinjuku NS Building"
+                    },
+                    {
+                        time: "13:35 - 15:00",
+                        title: "東京都廳 保健醫療局與 DMAT 運作說明",
+                        desc: "拜會保健醫療局醫療政策部長，聽取東京 DMAT (災害派遣醫療隊) 平時整備與出動機制，並參訪總合防災部。",
+                        transport: "步行參訪 🚶",
+                        transportColor: "#B9DAA5",
+                        isMust: true,
+                        locationName: "東京都廳 第一本廳舍",
+                        mapQuery: "Tokyo Metropolitan Government Building"
+                    },
+                    {
+                        time: "15:30 - 17:30",
+                        title: "救急部業務說明：マイナ救急 & #7119 AI 應用",
+                        desc: "搭車至スクワール麹町。深入探討個人編號卡於救護車端之病歷讀取 (マイナ救急) 及 #7119 急救諮詢 AI 輔助。",
+                        transport: "大眾運輸 🚇",
+                        transportColor: "#A8D3E6",
+                        isMust: true,
+                        locationName: "スクワール麹町 (SQUARE KOJIMACHI)",
+                        mapQuery: "SQUARE KOJIMACHI"
+                    },
+                    {
+                        time: "18:00 - 20:00",
+                        title: "臺日救護交流晚宴",
+                        desc: "於スクワール麹町舉行歡迎交流晚宴，建立雙方緊密救護聯絡網絡。",
+                        transport: "晚宴會場",
+                        transportColor: "#F2A497",
+                        isMust: false,
+                        locationName: "スクワール麹町 宴會廳",
+                        mapQuery: "SQUARE KOJIMACHI"
+                    }
+                ]
+            },
+            3: {
+                date: "2026年10月29日 (星期四)",
+                title: "救護車同乘・消防學校交流・板橋醫院視察",
+                stay: "京王プレッソイン東京九段下",
+                items: [
+                    {
+                        time: "07:45 - 08:30",
+                        title: "飯店集合前往幡ヶ谷廳舍",
+                        desc: "提前集合出發前往東京消防廳消防學校及第三方面本部所在地。",
+                        transport: "大眾運輸 🚇",
+                        transportColor: "#A8D3E6",
+                        isMust: false,
+                        locationName: "幡ヶ谷廳舍",
+                        mapQuery: "Tokyo Fire Department Fire Academy Hatagaya"
+                    },
+                    {
+                        time: "08:30 - 09:20",
+                        title: "救護車同乘實務見習",
+                        desc: "體驗東消救護車第一線出動流程與車載高階急救器材配置。",
+                        transport: "同乘實習 🚑",
+                        transportColor: "#F2A497",
+                        isMust: true,
+                        locationName: "幡ヶ谷廳舍 救急出張所",
+                        mapQuery: "Tokyo Fire Department Fire Academy Hatagaya"
+                    },
+                    {
+                        time: "09:30 - 12:00",
+                        title: "消防學校技術交流 & 第三方面本部 HR 視察",
+                        desc: "參訪救急技術訓練模組，並觀摩第三方面本部 Hyper Rescue 特殊急救搜救裝備；於廳舍享用便當意見交換。",
+                        transport: "園區移動 🚶",
+                        transportColor: "#B9DAA5",
+                        isMust: true,
+                        locationName: "東京消防廳 消防學校 / 第三方面本部",
+                        mapQuery: "Tokyo Fire Department Fire Academy Hatagaya"
+                    },
+                    {
+                        time: "15:00 - 16:30",
+                        title: "日大附屬板橋醫院 救命救急中心視察",
+                        desc: "醫學院院長親自致詞，實地參訪東京 DMAT 重度外傷急救中心及院前急救對接機制。",
+                        transport: "專車/大眾 🚇",
+                        transportColor: "#A8D3E6",
+                        isMust: true,
+                        locationName: "日本大學醫學院附屬板橋醫院",
+                        mapQuery: "Nihon University Itabashi Hospital"
+                    },
+                    {
+                        time: "18:00 - 20:00",
+                        title: "考察團交流晚宴",
+                        desc: "於「大衆酒場 合掌」餐敘，回顧東京段行程收穫與議題研討成果。",
+                        transport: "晚宴餐敘",
+                        transportColor: "#F2A497",
+                        isMust: false,
+                        locationName: "大衆酒場 合掌",
+                        mapQuery: "大衆酒場 合掌 日本"
+                    }
+                ]
+            },
+            4: {
+                date: "2026年10月30日 (星期五)",
+                title: "移師橫濱・119緊急檢傷・市民醫院視察",
+                stay: "シタディーンハーバーフロント横浜",
+                items: [
+                    {
+                        time: "10:00 - 11:30",
+                        title: "飯店退房，專車移師橫濱",
+                        desc: "行李裝車，搭乘署部安排之包車跨區移動至橫濱，先至飯店寄放行李並在港區享用中餐。",
+                        transport: "專車包車 🚌",
+                        transportColor: "#F6D27A",
+                        isMust: false,
+                        locationName: "シタディーンハーバーフロント横浜",
+                        mapQuery: "Citadines Harbour Front Yokohama"
+                    },
+                    {
+                        time: "13:30 - 15:20",
+                        title: "橫濱市消防局本部 深度研討",
+                        desc: "拜會在廳局部長；救急企畫課說明マイナ救急與救急自治條例第7條；司令課視察 119 指令中心緊急度判定與檢傷分級；醫療局說明 YMAT 機制。",
+                        transport: "包車接送 🚌",
+                        transportColor: "#F6D27A",
+                        isMust: true,
+                        locationName: "橫濱市消防局本部 (保土ヶ谷廳舍)",
+                        mapQuery: "Yokohama City Fire Bureau"
+                    },
+                    {
+                        time: "15:39 - 16:10",
+                        title: "搭乘公共交通移動",
+                        desc: "搭乘相鐵線自星川站前往橫濱站，轉乘巴士抵達市立市民醫院。",
+                        transport: "大眾運輸 🚇",
+                        transportColor: "#A8D3E6",
+                        isMust: false,
+                        locationName: "星川站 → 橫濱市民醫院",
+                        mapQuery: "Yokohama Municipal Citizen's Hospital"
+                    },
+                    {
+                        time: "16:15 - 16:50",
+                        title: "橫濱市立市民醫院 救命救急中心視察",
+                        desc: "由野垣科長或山縣醫師引導視察救命中心、YMAT 出動動線與急診檢傷實作。",
+                        transport: "公務參訪",
+                        transportColor: "#FFFCF6",
+                        isMust: true,
+                        locationName: "橫濱市立市民醫院",
+                        mapQuery: "Yokohama Municipal Citizen's Hospital"
+                    },
+                    {
+                        time: "18:00 - 20:00",
+                        title: "橫濱結業交流晚宴",
+                        desc: "於橫濱港灣人氣景觀餐廳 Revo Brewing 舉行慶功晚宴。",
+                        transport: "晚宴餐會 🍻",
+                        transportColor: "#F2A497",
+                        isMust: false,
+                        locationName: "Revo Brewing (APA Hotel & Resort Yokohama)",
+                        mapQuery: "REVO BREWING Yokohama"
+                    }
+                ]
+            },
+            5: {
+                date: "2026年10月31日 (星期六)",
+                title: "橫濱退房・專車前往羽田・平安賦歸",
+                stay: "溫暖的家",
+                items: [
+                    {
+                        time: "11:00 整",
+                        title: "飯店辦理退房與集合",
+                        desc: "於シタディーンハーバーフロント横浜大廳集合完畢，清點行李與公務物品。",
+                        transport: "大廳集合",
+                        transportColor: "#FFFCF6",
+                        isMust: false,
+                        locationName: "シタディーンハーバーフロント横浜",
+                        mapQuery: "Citadines Harbour Front Yokohama"
+                    },
+                    {
+                        time: "11:15 - 12:15",
+                        title: "專車前往羽田機場",
+                        desc: "搭乘署部包車經首都高速公路直達羽田國際機場第三航廈。",
+                        transport: "專車包車 🚌",
+                        transportColor: "#F6D27A",
+                        isMust: false,
+                        locationName: "羽田機場 國際線航廈",
+                        mapQuery: "Tokyo Haneda Airport Terminal 3"
+                    },
+                    {
+                        time: "14:15 - 17:15",
+                        title: "搭乘中華航空 CI221 返抵松山",
+                        desc: "辦理出境手續後登機返臺，下午 17:15 抵達臺北松山機場，圓滿結束五天四夜考察研習！",
+                        transport: "華航客機 ✈️",
+                        transportColor: "#A8D3E6",
+                        isMust: false,
+                        locationName: "臺北松山機場 第一航廈",
+                        mapQuery: "Taipei Songshan Airport"
+                    }
+                ]
+            }
+        };
+
+        // 預設待辦清單
+        const defaultTodos = [
+            { text: "中華民國護照（效期 6 個月以上）與相關公務證件", done: false },
+            { text: "拜會正式服裝（西裝套裝、領帶、深色皮鞋）", done: false },
+            { text: "救護車同乘研習裝備（救護制服或指定活動服、輕便鞋）", done: false },
+            { text: "公務名片（建議準備 30~50 張日/英文名片）", done: false },
+            { text: "鍾侑庭主任演講簡報備份（隨身碟＋雲端備份）", done: false },
+            { text: "個人研習筆記本、提問單與錄音設備", done: false },
+            { text: "日本上網 SIM 卡 / eSIM 安裝開通 / 漫遊確認", done: false },
+            { text: "10月底保暖外套（東京橫濱氣溫約16~25°C，早晚涼）", done: false },
+            { text: "便攜折疊傘（防秋季陣雨）與個人常備藥物", done: false },
+            { text: "公務核銷簽名單據與發票收納夾", done: false }
+        ];
+
+        // 取得儲存的待辦清單
+        function getTodos() {
+            try {
+                const stored = localStorage.getItem('ems_study_todos_2026');
+                if (stored) return JSON.parse(stored);
+            } catch(e) {}
+            return defaultTodos;
+        }
+
+        function saveTodos(todos) {
+            try {
+                localStorage.setItem('ems_study_todos_2026', JSON.stringify(todos));
+            } catch(e) {}
+        }
+
+        // 渲染待辦清單
+        function renderTodos() {
+            const todos = getTodos();
+            const listEl = document.getElementById('todo-list');
+            const countEl = document.getElementById('todo-count');
+            
+            const doneCount = todos.filter(t => t.done).length;
+            countEl.textContent = `${doneCount} / ${todos.length} 完成`;
+
+            listEl.innerHTML = todos.map((item, index) => `
+                <div class="flex items-center justify-between p-3 rounded-xl border-2 border-[#3E3A39] bg-[#FFFCF6] hover:bg-white transition">
+                    <label class="flex items-center gap-3 cursor-pointer flex-1">
+                        <input type="checkbox" onchange="toggleTodo(${index})" ${item.done ? 'checked' : ''} class="w-5 h-5 rounded accent-[#F2A497] border-2 border-[#3E3A39] cursor-pointer">
+                        <span class="text-xs md:text-sm font-bold ${item.done ? 'todo-done text-stone-400' : 'text-[#3E3A39]'}">
+                            ${item.text}
+                        </span>
+                    </label>
+                    <button onclick="deleteTodo(${index})" class="text-stone-400 hover:text-[#F2A497] p-1 text-xs">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function toggleTodo(index) {
+            const todos = getTodos();
+            if (todos[index]) {
+                todos[index].done = !todos[index].done;
+                saveTodos(todos);
+                renderTodos();
+            }
+        }
+
+        function deleteTodo(index) {
+            const todos = getTodos();
+            todos.splice(index, 1);
+            saveTodos(todos);
+            renderTodos();
+        }
+
+        function addNewTodo() {
+            const input = document.getElementById('new-todo-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const todos = getTodos();
+            todos.push({ text: text, done: false });
+            saveTodos(todos);
+            renderTodos();
+            input.value = '';
+        }
+
+        // 切換日期並渲染彈跳時間軸
+        function changeDay(day) {
+            // 更新按鈕狀態
+            document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-day-${day}`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            const dayData = itineraryData[day];
+            const container = document.getElementById('timeline-container');
+
+            // 觸發彈跳動畫重新播放
+            container.classList.remove('timeline-bounce');
+            void container.offsetWidth; // 強制重繪
+            container.classList.add('timeline-bounce');
+
+            container.innerHTML = `
+                <!-- 日期資訊橫條 -->
+                <div class="ink-box-sm bg-[#FFFCF6] p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-stone-500">${dayData.date}</span>
+                        <h3 class="text-lg font-black text-[#3E3A39]">${dayData.title}</h3>
+                    </div>
+                    <span class="tag-pill bg-[#A8D3E6]">
+                        <i class="fa-solid fa-bed mr-1"></i> 住宿：${dayData.stay}
+                    </span>
+                </div>
+
+                <!-- 每日行程節點卡片清單 -->
+                <div class="space-y-3 pt-2">
+                    ${dayData.items.map((item, idx) => `
+                        <div class="ink-box p-4 md:p-5 bg-white relative">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 rounded-full border-2 border-[#3E3A39] bg-[#F6D27A] text-xs font-black text-[#3E3A39]">
+                                        <i class="fa-regular fa-clock mr-1"></i>${item.time}
+                                    </span>
+                                    <span class="tag-pill" style="background-color: ${item.transportColor}">
+                                        ${item.transport}
+                                    </span>
+                                </div>
+                                ${item.isMust ? `
+                                    <span class="tag-pill bg-[#F2A497] text-white">
+                                        ⭐ 必訪・重點研習
+                                    </span>
+                                ` : ''}
+                            </div>
+
+                            <h4 class="text-base md:text-lg font-bold text-[#3E3A39]">${item.title}</h4>
+                            <p class="text-xs md:text-sm text-stone-600 mt-1 leading-relaxed">${item.desc}</p>
+
+                            <div class="mt-3 pt-2 border-t-2 border-dashed border-[#3E3A39] flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs text-stone-500 font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-map-pin text-[#F2A497]"></i> ${item.locationName}
+                                </span>
+                                <a href="https://maps.google.com/?q=${encodeURIComponent(item.mapQuery)}" target="_blank" class="ink-btn bg-[#FFFCF6] hover:bg-[#F6D27A] px-3 py-1 text-xs">
+                                    <i class="fa-solid fa-location-arrow mr-1 text-[#3E3A39]"></i> Google Maps 導航
+                                </a>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // 倒數計時器
+        function updateCountdown() {
+            // 出發目標時間：2026 年 10 月 27 日 09:00:00 (台北時區 GMT+8)
+            const targetDate = new Date('2026-10-27T09:00:00+08:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const daysEl = document.getElementById('cd-days');
+            const hoursEl = document.getElementById('cd-hours');
+            const minutesEl = document.getElementById('cd-minutes');
+            const secondsEl = document.getElementById('cd-seconds');
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                daysEl.textContent = days;
+                hoursEl.textContent = hours < 10 ? '0' + hours : hours;
+                minutesEl.textContent = minutes < 10 ? '0' + minutes : minutes;
+                secondsEl.textContent = seconds < 10 ? '0' + seconds : seconds;
+            } else {
+                daysEl.textContent = "0";
+                hoursEl.textContent = "00";
+                minutesEl.textContent = "00";
+                secondsEl.textContent = "00";
+            }
+        }
+
+        // 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            changeDay(1);
+            renderTodos();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // 支援 Enter 鍵新增待辦
+            document.getElementById('new-todo-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addNewTodo();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
